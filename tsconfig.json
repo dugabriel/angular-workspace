@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@fluig-codelab-lib/ngx-api": [
+        "dist/fluig-codelab-lib/ngx-api"
+      ],
+      "@fluig-codelab-lib/ngx-api/*": [
+        "dist/fluig-codelab-lib/ngx-api/*"
+      ]
+    }
   }
 }

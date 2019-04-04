@@ -2,5 +2,174 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "ngx-code-labs": {
+      "root": "projects/ngx-code-labs/",
+      "sourceRoot": "projects/ngx-code-labs/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-code-labs",
+            "index": "projects/ngx-code-labs/src/index.html",
+            "main": "projects/ngx-code-labs/src/main.ts",
+            "polyfills": "projects/ngx-code-labs/src/polyfills.ts",
+            "tsConfig": "projects/ngx-code-labs/tsconfig.app.json",
+            "assets": [
+              "projects/ngx-code-labs/src/favicon.ico",
+              "projects/ngx-code-labs/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-code-labs/src/styles.scss"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-code-labs/src/environments/environment.ts",
+                  "with": "projects/ngx-code-labs/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-code-labs:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-code-labs:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-code-labs:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-code-labs/src/test.ts",
+            "polyfills": "projects/ngx-code-labs/src/polyfills.ts",
+            "tsConfig": "projects/ngx-code-labs/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-code-labs/karma.conf.js",
+            "styles": [
+              "projects/ngx-code-labs/src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/ngx-code-labs/src/favicon.ico",
+              "projects/ngx-code-labs/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-code-labs/tsconfig.app.json",
+              "projects/ngx-code-labs/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-code-labs-e2e": {
+      "root": "projects/ngx-code-labs-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngx-code-labs-e2e/protractor.conf.js",
+            "devServerTarget": "ngx-code-labs:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-code-labs:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/ngx-code-labs-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@fluig-codelab-lib/ngx-api": {
+      "root": "projects/fluig-codelab-lib/ngx-api",
+      "sourceRoot": "projects/fluig-codelab-lib/ngx-api/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fluig-codelab-lib/ngx-api/tsconfig.lib.json",
+            "project": "projects/fluig-codelab-lib/ngx-api/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fluig-codelab-lib/ngx-api/src/test.ts",
+            "tsConfig": "projects/fluig-codelab-lib/ngx-api/tsconfig.spec.json",
+            "karmaConfig": "projects/fluig-codelab-lib/ngx-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fluig-codelab-lib/ngx-api/tsconfig.lib.json",
+              "projects/fluig-codelab-lib/ngx-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-code-labs"
 }
